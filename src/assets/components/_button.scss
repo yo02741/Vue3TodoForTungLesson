@@ -1,0 +1,23 @@
+button {
+  &.btn:disabled {
+    border-color: #e4e4e4;
+    background: #e4e4e4 !important;
+    color: #b7b7b7 !important;
+    cursor: not-allowed;
+    pointer-events: all;
+  }
+}
+.btn {
+  &-info {
+    &:hover,
+    &:focus {
+      background: #1684ea;
+    }
+  }
+  &-primary {
+    &:hover,
+    &:focus {
+      background: #008850;
+    }
+  }
+}
