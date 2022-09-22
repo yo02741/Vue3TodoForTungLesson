@@ -1,6 +1,4 @@
 <script setup>
-import { computed, onMounted, ref } from "vue";
-import router from "../router";
 import loginAnimation from "@/assets/json/loginAnimation.json";
 
 const account = ref("");
