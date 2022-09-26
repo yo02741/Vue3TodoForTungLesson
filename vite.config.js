@@ -30,5 +30,11 @@ export default defineConfig({
   server: {
     host: "0.0.0.0",
     port: 8080,
+    proxy: {
+      "/api": {
+        target: "http://10.6.6.134:8081/",
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+    },
   },
 });

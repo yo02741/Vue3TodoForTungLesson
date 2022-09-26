@@ -1,5 +1,9 @@
 <script setup>
+import { ref, computed, onMounted } from "vue";
+import router from "../router";
 import loginAnimation from "@/assets/json/loginAnimation.json";
+
+import { login } from "@/axios";
 
 const account = ref("");
 const password = ref("");
@@ -20,7 +24,25 @@ const passwordTypeUpdate = () => {
 
 const rememberMe = ref(false);
 
-const onLogin = () => {
+const onLogin = async () => {
+  // 打 登入 api
+  const param = {
+    username: account.value,
+    password: password.value,
+  };
+
+  const result = await login(param);
+
+  // 若失敗 走這邊
+  if (result.status !== 200) {
+    alert("帳號密碼錯誤！"); // 通常會用 Toast 、Message 之類的
+    password.value = "";
+    inputPwd.value.focus();
+    return;
+  }
+
+  // 若成功 走這邊
+  alert("登入成功！");
   router.push({ path: "/" });
 };
 
@@ -62,6 +84,7 @@ onMounted(() => {
               type="password"
               class="form-control"
               placeholder="密碼"
+              @keyup.enter="onLogin"
             />
             <label>
               <img src="@/assets/icons/login-password.svg" alt="" />
